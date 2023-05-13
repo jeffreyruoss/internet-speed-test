@@ -1,47 +1,53 @@
 fetch('results-clean.json')
   .then(response => response.json())
   .then(data => {
-    const resultsTable = document.getElementById('resultsTable');
+    try {
+      const resultsTable = document.getElementById('resultsTable');
 
-    data = data.reverse();
+      data = data.reverse();
 
-    for (const item of data) {
-      const row = document.createElement('tr');
-      row.classList.add('table-row');
+      for (const item of data) {
+        const row = document.createElement('tr');
+        row.classList.add('table-row');
 
-      let cell = document.createElement('td');
-      cell.textContent = new Date(item.timestamp).toLocaleString();
-      cell.classList.add('timestamp-cell');
-      row.appendChild(cell);
+        let cell = document.createElement('td');
+        cell.textContent = new Date(item.timestamp).toLocaleString();
+        cell.classList.add('timestamp-cell');
+        row.appendChild(cell);
 
-      cell = document.createElement('td');
-      cell.textContent = (item.download / (1024 * 1024)).toFixed(2);
-      cell.classList.add('download-cell');
-      row.appendChild(cell);
+        cell = document.createElement('td');
+        cell.textContent = (item.download / (1024 * 1024)).toFixed(2);
+        cell.classList.add('download-cell');
+        row.appendChild(cell);
 
-      cell = document.createElement('td');
-      cell.textContent = (item.upload / (1024 * 1024)).toFixed(2);
-      cell.classList.add('upload-cell');
-      row.appendChild(cell);
+        cell = document.createElement('td');
+        cell.textContent = (item.upload / (1024 * 1024)).toFixed(2);
+        cell.classList.add('upload-cell');
+        row.appendChild(cell);
 
-      cell = document.createElement('td');
-      cell.textContent = item.ping.toFixed(2);
-      cell.classList.add('ping-cell');
-      row.appendChild(cell);
+        cell = document.createElement('td');
+        cell.textContent = item.ping.toFixed(2);
+        cell.classList.add('ping-cell');
+        row.appendChild(cell);
 
-      cell = document.createElement('td');
-      cell.textContent = `${item.server.name}, ${item.server.country}`;
-      cell.classList.add('server-cell');
-      row.appendChild(cell);
+        cell = document.createElement('td');
+        cell.textContent = `${item.server.name}, ${item.server.country}`;
+        cell.classList.add('server-cell');
+        row.appendChild(cell);
 
-      cell = document.createElement('td');
-      cell.textContent = item.client.ip;
-      cell.classList.add('ip-cell');
-      row.appendChild(cell);
+        cell = document.createElement('td');
+        cell.textContent = item.client.ip;
+        cell.classList.add('ip-cell');
+        row.appendChild(cell);
 
-      resultsTable.appendChild(row);
+        resultsTable.appendChild(row);
+      }
+    } catch (error) {
+      console.error(error);
     }
-  });
+  })
+  .catch(error => console.error(error));
+
 
 const showAllRows = () => {
 let table = document.getElementById('resultsTable');
