@@ -45,6 +45,7 @@ fetch('results-clean.json')
         cell = document.createElement('td');
         cell.textContent = `${item.server.name}, ${item.server.country}`;
         cell.classList.add('server-cell');
+        cell.classList.add('hide');
         row.appendChild(cell);
 
         cell = document.createElement('td');
@@ -118,8 +119,30 @@ const toggleDateSpan = () => {
   });
 }
 
-document.getElementById('toggle-date-button').addEventListener('click', toggleDateSpan);
+const toggleServerColumn = () => {
+  const serverHeaders = document.querySelectorAll('.server-header');
+  const serverCells = document.querySelectorAll('.server-cell');
 
+  serverHeaders.forEach((serverHeader) => {
+    if (serverHeader.classList.contains('hide')) {
+      serverHeader.classList.remove('hide');
+    } else {
+      serverHeader.classList.add('hide');
+    }
+  });
+
+  serverCells.forEach((serverCell) => {
+    if (serverCell.classList.contains('hide')) {
+      serverCell.classList.remove('hide');
+    } else {
+      serverCell.classList.add('hide');
+    }
+  });
+}
+
+document.getElementById('toggle-server-button').addEventListener('click', toggleServerColumn);
+
+document.getElementById('toggle-date-button').addEventListener('click', toggleDateSpan);
 
 document.getElementById('one-minute-button').addEventListener('click', () => showRowsEveryNMinutes(1));
 
