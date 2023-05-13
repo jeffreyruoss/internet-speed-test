@@ -100,58 +100,6 @@
                   }
             });
 
-            // Show every 1 minute
-            document.getElementById('one-minute-button').addEventListener('click', function() {
-              showAllRows();
-              let table = document.getElementById('resultsTable');
-              let rows = table.getElementsByClassName('table-row');
-
-              for (let row of rows) {
-                let timestamp = row.getElementsByClassName('timestamp-cell')[0].textContent;
-                let date = new Date(timestamp);
-                let minutes = date.getMinutes();
-
-                if (minutes % 1 !== 0) {
-                  row.style.display = 'none';
-                }
-              }
-            });
-
-            // Show every 5 minutes
-            document.getElementById('five-minutes-button').addEventListener('click', function() {
-              showAllRows();
-              let table = document.getElementById('resultsTable');
-              let rows = table.getElementsByClassName('table-row');
-
-              for (let row of rows) {
-                let timestamp = row.getElementsByClassName('timestamp-cell')[0].textContent;
-                let date = new Date(timestamp);
-                let minutes = date.getMinutes();
-
-                if (minutes % 5 !== 0) {
-                  row.style.display = 'none';
-                }
-              }
-            });
-
-            // Show every 10 minutes
-            document.getElementById('ten-minutes-button').addEventListener('click', function() {
-              showAllRows();
-              let table = document.getElementById('resultsTable');
-              let rows = table.getElementsByClassName('table-row');
-
-              for (let row of rows) {
-                let timestamp = row.getElementsByClassName('timestamp-cell')[0].textContent;
-                let date = new Date(timestamp);
-                let minutes = date.getMinutes();
-
-                if (minutes % 10 !== 0) {
-                  row.style.display = 'none';
-                }
-              }
-            });
-
-            // Remove display none from all rows
             const showAllRows = () => {
               let table = document.getElementById('resultsTable');
               let rows = table.getElementsByClassName('table-row');
@@ -160,6 +108,29 @@
                 row.style.display = 'table-row';
               }
             };
+
+            const showRowsEveryNMinutes = (n) => {
+              showAllRows();
+              let table = document.getElementById('resultsTable');
+              let rows = table.getElementsByClassName('table-row');
+
+              for (let row of rows) {
+                let timestamp = row.getElementsByClassName('timestamp-cell')[0].textContent;
+                let date = new Date(timestamp);
+                let minutes = date.getMinutes();
+
+                if (minutes % n !== 0) {
+                  row.style.display = 'none';
+                }
+              }
+            };
+
+            document.getElementById('one-minute-button').addEventListener('click', () => showRowsEveryNMinutes(1));
+
+            document.getElementById('five-minutes-button').addEventListener('click', () => showRowsEveryNMinutes(5));
+
+            document.getElementById('ten-minutes-button').addEventListener('click', () => showRowsEveryNMinutes(10));
+
         </script>
     </body>
 </html>
