@@ -1,0 +1,29 @@
+body {
+  padding: 15px;
+  font-size: 16px;
+}
+.buttons {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 9px;
+}
+.buttons a {
+  border-radius: 5px;
+  border: 1px solid rgba(22, 168, 217, 0.5);
+  padding: 10px;
+}
+.buttons a:hover {
+  text-decoration: none;
+}
+th {
+  color: #81b0d9c9;
+}
+th, td {
+  font-size: 16px;
+}
+.download-cell {
+  color: #6AFFF3;
+}
+.upload-cell {
+  color: #BF71FF;
+}
