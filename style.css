@@ -38,12 +38,4 @@ th, td {
     margin-bottom: 15px;
     display: block;
   }
-  .ping-header,
-  .ping-cell,
-  .server-header,
-  .server-cell,
-  .client-header,
-  .ip-cell {
-    display: none;
-  }
 }
