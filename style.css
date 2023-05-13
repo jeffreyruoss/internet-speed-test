@@ -2,6 +2,9 @@ body {
   padding: 15px;
   font-size: 16px;
 }
+.hide {
+  display: none;
+}
 .buttons {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -21,9 +24,26 @@ th {
 th, td {
   font-size: 16px;
 }
+.date-span {
+  opacity: 0.5;
+}
 .download-cell {
   color: #6AFFF3;
 }
 .upload-cell {
   color: #BF71FF;
+}
+@media (min-width: 0) and (max-width: 600px) {
+  .buttons a {
+    margin-bottom: 15px;
+    display: block;
+  }
+  .ping-header,
+  .ping-cell,
+  .server-header,
+  .server-cell,
+  .client-header,
+  .ip-cell {
+    display: none;
+  }
 }

@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Internet Speed Test Results</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
         <link rel="stylesheet" href="style.css">
     </head>
@@ -10,16 +11,17 @@
           <a href="#" id="one-minute-button">Show every 1 minute</a>
           <a href="#" id="five-minutes-button">Show every 5 minutes</a>
           <a href="#" id="ten-minutes-button">Show every 10 minutes</a>
+          <a href="#" id="toggle-date-button">Toggle date</a>
         </div>
 
         <table id="resultsTable">
             <tr>
-                <th>Timestamp</th>
-                <th>Download Speed (Mbps)</th>
-                <th>Upload Speed (Mbps)</th>
-                <th>Ping</th>
-                <th>Server</th>
-                <th>Client IP</th>
+                <th class="timestamp-header">Timestamp</th>
+                <th class="download-header">Download Speed (Mbps)</th>
+                <th class="upload-header">Upload Speed (Mbps)</th>
+                <th class="ping-header">Ping</th>
+                <th class="server-header">Server</th>
+                <th class="client-header">Client IP</th>
             </tr>
         </table>
 

@@ -11,9 +11,20 @@ fetch('results-clean.json')
         row.classList.add('table-row');
 
         let cell = document.createElement('td');
-        cell.textContent = new Date(item.timestamp).toLocaleString();
+        let date = new Date(item.timestamp);
+        let dateSpan = document.createElement('span');
+        dateSpan.textContent = date.toLocaleDateString();
+        dateSpan.classList.add('date-span');
+        cell.appendChild(dateSpan);
+        let space = document.createTextNode(' ');
+        cell.appendChild(space);
+        let timeSpan = document.createElement('span');
+        timeSpan.textContent = formatTime(date);
+        timeSpan.classList.add('time-span');
+        cell.appendChild(timeSpan);
         cell.classList.add('timestamp-cell');
         row.appendChild(cell);
+        
 
         cell = document.createElement('td');
         cell.textContent = (item.download / (1024 * 1024)).toFixed(2);
@@ -48,31 +59,66 @@ fetch('results-clean.json')
   })
   .catch(error => console.error(error));
 
+function formatTime(date) {
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  let ampm = hours >= 12 ? 'p' : 'a';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+  return hours + ':' + minutes + ampm;
+}
+
+const parseTime = (timeString) => {
+  let [time, period] = timeString.split(/(?=[ap])/);
+  let [hours, minutes] = time.split(':').map(Number);
+  if (period === 'p' && hours < 12) {
+    hours += 12;
+  } else if (period === 'a' && hours === 12) {
+    hours = 0;
+  }
+  return {hours, minutes};
+}
+
 
 const showAllRows = () => {
-let table = document.getElementById('resultsTable');
-let rows = table.getElementsByClassName('table-row');
+  let table = document.getElementById('resultsTable');
+  let rows = table.getElementsByClassName('table-row');
 
-for (let row of rows) {
-  row.style.display = 'table-row';
-}
+  for (let row of rows) {
+    row.style.display = 'table-row';
+  }
 };
 
 const showRowsEveryNMinutes = (n) => {
-showAllRows();
-let table = document.getElementById('resultsTable');
-let rows = table.getElementsByClassName('table-row');
+  showAllRows();
+  let table = document.getElementById('resultsTable');
+  let rows = table.getElementsByClassName('table-row');
 
-for (let row of rows) {
-  let timestamp = row.getElementsByClassName('timestamp-cell')[0].textContent;
-  let date = new Date(timestamp);
-  let minutes = date.getMinutes();
+  for (let row of rows) {
+    let timestamp = row.getElementsByClassName('timestamp-cell')[0].textContent;
+    let {hours, minutes} = parseTime(timestamp);
 
-  if (minutes % n !== 0) {
-    row.style.display = 'none';
+    if (minutes % n !== 0) {
+      row.style.display = 'none';
+    }
   }
 }
-};
+
+const toggleDateSpan = () => {
+  const dateSpans = document.querySelectorAll('.date-span');
+
+  dateSpans.forEach((dateSpan) => {
+    if (dateSpan.classList.contains('hide')) {
+      dateSpan.classList.remove('hide');
+    } else {
+      dateSpan.classList.add('hide');
+    }
+  });
+}
+
+document.getElementById('toggle-date-button').addEventListener('click', toggleDateSpan);
+
 
 document.getElementById('one-minute-button').addEventListener('click', () => showRowsEveryNMinutes(1));
 
