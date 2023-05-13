@@ -8,6 +8,22 @@
             padding: 15px;
             font-size: 16px;
           }
+          .buttons {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 9px;
+          }
+          .buttons a {
+            border-radius: 5px;
+            border: 1px solid rgba(22, 168, 217, 0.5);
+            padding: 10px;
+          }
+          .buttons a:hover {
+            text-decoration: none;
+          }
+          th {
+            color: #81b0d9c9;
+          }
           th, td {
             font-size: 16px;
           }
@@ -20,9 +36,11 @@
         </style>
     </head>
     <body>
-        <a href="#" id="one-minute-button">Show every 1 minute</a> | 
-        <a href="#" id="five-minutes-button">Show every 5 minutes</a> | 
-        <a href="#" id="ten-minutes-button">Show every 10 minutes</a>
+        <div class="buttons">
+          <a href="#" id="one-minute-button">Show every 1 minute</a>
+          <a href="#" id="five-minutes-button">Show every 5 minutes</a>
+          <a href="#" id="ten-minutes-button">Show every 10 minutes</a>
+        </div>
 
         <table id="resultsTable">
             <tr>
