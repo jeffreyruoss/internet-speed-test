@@ -15,6 +15,7 @@ fetch('results-clean.json')
         let dateSpan = document.createElement('span');
         dateSpan.textContent = date.toLocaleDateString();
         dateSpan.classList.add('date-span');
+        dateSpan.classList.add('hide');
         cell.appendChild(dateSpan);
         let space = document.createTextNode(' ');
         cell.appendChild(space);
@@ -64,7 +65,7 @@ function formatTime(date) {
   let minutes = date.getMinutes();
   let ampm = hours >= 12 ? 'p' : 'a';
   hours = hours % 12;
-  hours = hours ? hours : 12; // the hour '0' should be '12'
+  hours = hours ? hours : 12;
   minutes = minutes < 10 ? '0' + minutes : minutes;
   return hours + ':' + minutes + ampm;
 }
