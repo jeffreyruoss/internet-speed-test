@@ -26,7 +26,7 @@ touch results.json
 touch results-clean.json
 ```
 
-## Run the web
+## Run the web page
 Run the web page to view the results
 
 Wait a minute for the cron job to run and update the JSON files
